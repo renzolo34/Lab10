@@ -43,9 +43,9 @@
         </dd>*@
     </dl>
 
-    <p>Selected Invoice ID: <strong>@Model.invoice_id</strong></p>
+    @*<p>Selected Invoice ID: <strong>@Model.invoice_id</strong></p>*@
     
-    <form asp-action="Delete" asp-route-id="invoice_id" method="post">
+    <form asp-action="Delete">
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

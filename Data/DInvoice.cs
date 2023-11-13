@@ -11,7 +11,7 @@ namespace Data
 {
     public class DInvoice
     {
-        private readonly string connectionString = "Data Source=LAB1504-23\\SQLEXPRESS;Initial Catalog=db;User ID=renzo;Password=123456";
+        private readonly string connectionString = "Data Source=RENZO\\SQLEXPRESS;Initial Catalog=db;User ID=renzolo;Password=123456";
 
         public List<Invoice> Get()
         {
@@ -86,22 +86,23 @@ namespace Data
             }
         }
 
-        public void DeactivateInvoice(int invoiceId)
+        public bool DeactivateInvoice(int invoiceId)
         {
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
 
-                using (SqlCommand command = new SqlCommand("desactivar_invoice", connection))
+                using (SqlCommand command = new SqlCommand("UpdateActiveStatus", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@RecordID", invoiceId);
 
-                    command.Parameters.Add(new SqlParameter("@invoice_id", SqlDbType.Int));
-                    command.Parameters["@invoice_id"].Value = invoiceId;
+                    int rowsAffected = command.ExecuteNonQuery();
 
-                    command.ExecuteNonQuery();
+
                 }
             }
+            return true;
         }
 
     }

@@ -39,10 +39,11 @@ namespace Business
             data.CreateInvoice(invoice);
         }
 
-        public void DeactivateInvoice(int id)
+        public bool DeactivateInvoice(int invoiceId)
         {
             DInvoice data = new DInvoice();
-            data.DeactivateInvoice(id);
+
+            return data.DeactivateInvoice(invoiceId);
         }
 
     }
